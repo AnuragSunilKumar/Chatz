@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import firebase from 'firebase/app';
+
 const config = {
   apiKey: "AIzaSyApzO0kARODyaWgWs6RA0k3YOSxEu_n8wA",
   authDomain: "chatz-web-app.firebaseapp.com",
