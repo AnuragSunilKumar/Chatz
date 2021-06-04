@@ -9,9 +9,7 @@ const PrivateRoute = ({children, ...routeProps}) => {
     return <Redirect to= "/signin"/>
   } 
   return (
-    <Route {...routeProps}>{
-      children
-    }</Route>
+    <Route {...routeProps}>{children}</Route>
   )
 }
 
