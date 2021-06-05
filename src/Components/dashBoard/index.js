@@ -1,12 +1,24 @@
 import React from 'react';
-import { Button, Divider, Drawer } from 'rsuite';
+import { Alert, Button, Divider, Drawer } from 'rsuite';
 import { useProfile } from '../../Context/profile.context';
+import { database } from '../../misc/Firebase';
 import EditableInput from '../EditableInput';
 
 const DashBoard = ({ onSignOut }) => {
   const { profile } = useProfile();
 
-  const onSave = async newData => {};
+  const onSave = async newData => {
+    const userNicknameRef = database
+      .ref(`/profiles/${profile.uid}`)
+      .child('name');
+    try {
+      await userNicknameRef.set(newData);
+
+      Alert.success('Nickname has been changed', 4000);
+    } catch (err) {
+      Alert.error(err.message, 4000);
+    }
+  };
 
   return (
     <>
