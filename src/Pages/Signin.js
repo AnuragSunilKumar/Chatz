@@ -15,8 +15,8 @@ const Signin = () => {
       name: user.displayName,
       createdAt : firebase.database.ServerValue.TIMESTAMP
   })
-  Alert.success('Signed in',4000);
-} 
+  
+} Alert.success('Signed in',4000);
 
  } catch(err){
      Alert.error(err.message,4000);
