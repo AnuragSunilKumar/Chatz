@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database'
+import 'firebase/database';
+import 'firebase/storage';
+import { isLocalhost } from './helpers';
 
 const config = {
   apiKey: "AIzaSyApzO0kARODyaWgWs6RA0k3YOSxEu_n8wA",
@@ -14,7 +16,10 @@ const config = {
 };
 
 const app = firebase.initializeApp(config);
-export const auth =app.auth();
+export const auth = app.auth();
 export const database = app.database();
+export const storage = app.storage();
+
+
 
 
