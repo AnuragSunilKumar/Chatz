@@ -6,10 +6,11 @@ import {
   Form,
   ControlLabel,
   FormControl,
-  FormGroup,
   Schema,
+  FormGroup,
   Alert,
 } from 'rsuite';
+
 import firebase from 'firebase/app';
 import { useModalState } from '../misc/custom-hooks';
 import { database, auth } from '../misc/firebase';
