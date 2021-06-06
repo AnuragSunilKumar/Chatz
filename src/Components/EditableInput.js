@@ -1,23 +1,24 @@
 import React, { useState, useCallback } from 'react';
-import { Alert, Icon, Input, InputGroup } from 'rsuite';
+import { Input, InputGroup, Icon, Alert } from 'rsuite';
 
 const EditableInput = ({
   initialValue,
   onSave,
   label = null,
-  placeholder = 'Write your message',
-  emptyMessage = 'input is empty',
+  placeholder = 'Write your value',
+  emptyMsg = 'Input is empty',
+  wrapperClassName = '',
   ...inputProps
 }) => {
   const [input, setInput] = useState(initialValue);
-  const [isEditable, setisEditable] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
 
   const onInputChange = useCallback(value => {
     setInput(value);
   }, []);
 
   const onEditClick = useCallback(() => {
-    setisEditable(p => !p);
+    setIsEditable(p => !p);
     setInput(initialValue);
   }, [initialValue]);
 
@@ -25,17 +26,19 @@ const EditableInput = ({
     const trimmed = input.trim();
 
     if (trimmed === '') {
-      Alert.info(emptyMessage, 4000);
+      Alert.info(emptyMsg, 4000);
+      return;
     }
 
     if (trimmed !== initialValue) {
       await onSave(trimmed);
     }
-    setisEditable(false);
+
+    setIsEditable(false);
   };
 
   return (
-    <div>
+    <div className={wrapperClassName}>
       {label}
       <InputGroup>
         <Input

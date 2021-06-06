@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Divider } from 'rsuite';
-import DashboardToggle from './dashBoard/dashboardToggle';
+import DashboardToggle from './dashBoard/DashboardToggle';
 import CreateRoomBtnModal from './CreateRoomBtnModal';
 import ChatRoomList from './rooms/ChatRoomList';
 

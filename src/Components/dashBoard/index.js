@@ -1,22 +1,27 @@
 import React from 'react';
-import { Alert, Button, Divider, Drawer } from 'rsuite';
+import { Drawer, Button, Divider, Alert } from 'rsuite';
 import { useProfile } from '../../Context/profile.context';
-import { database } from '../../misc/Firebase';
 import EditableInput from '../EditableInput';
-import AvatarUploadBtn from './AvatarUploadBtn';
+import { database } from '../../misc/firebase';
 import ProviderBlock from './ProviderBlock';
+import AvatarUploadBtn from './AvatarUploadBtn';
+import { getUserUpdates } from '../../misc/helpers';
 
-const DashBoard = ({ onSignOut }) => {
+const Dashboard = ({ onSignOut }) => {
   const { profile } = useProfile();
 
   const onSave = async newData => {
-    const userNicknameRef = database
-      .ref(`/profiles/${profile.uid}`)
-      .child('name');
     try {
-      await userNicknameRef.set(newData);
+      const updates = await getUserUpdates(
+        profile.uid,
+        'name',
+        newData,
+        database
+      );
 
-      Alert.success('Nickname has been changed', 4000);
+      await database.ref().update(updates);
+
+      Alert.success('Nickname has been updated', 4000);
     } catch (err) {
       Alert.error(err.message, 4000);
     }
@@ -25,19 +30,18 @@ const DashBoard = ({ onSignOut }) => {
   return (
     <>
       <Drawer.Header>
-        <Drawer.Title>DashBoard</Drawer.Title>
+        <Drawer.Title>Dashboard</Drawer.Title>
       </Drawer.Header>
 
       <Drawer.Body>
-        <h3> Hey, {profile.name} </h3>
+        <h3>Hey, {profile.name}</h3>
         <ProviderBlock />
         <Divider />
-
         <EditableInput
           name="nickname"
           initialValue={profile.name}
           onSave={onSave}
-          label={<h6 className="mb-2">Nickname </h6>}
+          label={<h6 className="mb-2">Nickname</h6>}
         />
         <AvatarUploadBtn />
       </Drawer.Body>
@@ -51,4 +55,4 @@ const DashBoard = ({ onSignOut }) => {
   );
 };
 
-export default DashBoard;
+export default Dashboard;

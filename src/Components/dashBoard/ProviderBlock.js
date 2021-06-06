@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Alert, Button, Icon, Tag } from 'rsuite';
+import { Tag, Icon, Button, Alert } from 'rsuite';
 import firebase from 'firebase/app';
-import { auth } from '../../misc/Firebase';
+import { auth } from '../../misc/firebase';
 
 const ProviderBlock = () => {
-  const [isConnected, setisConnected] = useState({
+  const [isConnected, setIsConnected] = useState({
     'google.com': auth.currentUser.providerData.some(
       data => data.providerId === 'google.com'
     ),
@@ -14,7 +14,7 @@ const ProviderBlock = () => {
   });
 
   const updateIsConnected = (providerId, value) => {
-    setisConnected(p => {
+    setIsConnected(p => {
       return {
         ...p,
         [providerId]: value,
@@ -25,11 +25,10 @@ const ProviderBlock = () => {
   const unlink = async providerId => {
     try {
       if (auth.currentUser.providerData.length === 1) {
-        throw new Error(`You cannot disconnect from ${providerId}`);
+        throw new Error(`You can not disconnect from ${providerId}`);
       }
 
       await auth.currentUser.unlink(providerId);
-
       updateIsConnected(providerId, false);
       Alert.info(`Disconnected from ${providerId}`, 4000);
     } catch (err) {
@@ -48,12 +47,12 @@ const ProviderBlock = () => {
     try {
       await auth.currentUser.linkWithPopup(provider);
       Alert.info(`Linked to ${provider.providerId}`, 4000);
-
       updateIsConnected(provider.providerId, true);
     } catch (err) {
-      Alert.error(err.message, 4000);
+      Alert.error(err.message, 400);
     }
   };
+
   const linkFacebook = () => {
     link(new firebase.auth.FacebookAuthProvider());
   };
