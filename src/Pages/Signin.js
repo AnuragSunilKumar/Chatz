@@ -36,7 +36,7 @@ const SignIn = () => {
           <Col xs={24} md={12} mdOffset={6}>
             <Panel>
               <div className="text-center">
-                <h2>Welcome to Chat</h2>
+                <h2>Welcome to ChatZ</h2>
                 <p>Progressive chat platform for neophytes</p>
               </div>
 
