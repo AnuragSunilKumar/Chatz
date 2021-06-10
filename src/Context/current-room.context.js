@@ -5,9 +5,9 @@ const CurrentRoomContext = createContext();
 
 export const CurrentRoomProvider = ({ children, data }) => {
   return (
-    <CurrentRoomProvider.Provider value={data}>
+<CurrentRoomContext.Provider value={data}>
       {children}
-    </CurrentRoomProvider.Provider>
+    </CurrentRoomContext.Provider>
   );
 };
 
