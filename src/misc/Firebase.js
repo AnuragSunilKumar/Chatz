@@ -18,13 +18,13 @@ const config = {
 };
 
 export const fcmVapidKey =
-  'BLs_I-HQyrAuUJJh8H3U0vtHGhVhXLMqoVoomeNL90GMKm0-o7sSoN9CJYRiBAVz-Yi7ZAni8mKateJfDwodTnw';
+  'BBv_CLb2_qF8muVsWon5SFXzJnKCnv-rnqBRVrIrj2PV6mTOhiD3UiJfZ2r2iTHmENGF916r_OsOtUF7z1XDH5E';
 
 const app = firebase.initializeApp(config);
 export const auth = app.auth();
 export const database = app.database();
 export const storage = app.storage();
-export const functions = app.functions('europe-west3');
+export const functions = app.functions('us-east4');
 
 export const messaging = firebase.messaging.isSupported()
   ? app.messaging()
